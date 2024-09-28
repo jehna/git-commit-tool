@@ -1,88 +1,111 @@
 # commit-message-tool
 
-Welcome to **commit-message-tool**—because if you're going to commit to a change, you might as well commit to a message too. This tool exists solely to ensure that your commit messages are as fancy as your code (which is likely not very). Let's dive in, shall we?
+Ah, welcome to the *commit-message-tool*. You’re here for a reason: to improve those woeful commit messages you’ve been crafting in a caffeine-fueled frenzy. This tool will guide you through writing great commit messages, because apparently, the universe wants you to avoid being a “git commit” pariah.
 
-## Overview
+## Table of Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
 
-`commit-message-tool` automatically generates beautifully crafted commit messages based on the diffs in your Git staged files. So, instead of your usual "fixed stuff" or "updated things," you'll have messages that could even engage the most uninterested of developers (which is a small victory, considering the state of our profession).
+## Introduction
 
-## Files
-
-- **prepare-commit-msg**: The actual brain behind the operation, written in Python 3. It reads your diff, generates a commit message using OpenAI's API, and then sprinkles some magic over your existing message if you happen to have one.
-
-- **setup-dev.sh**: A script that sets up the `prepare-commit-msg` hook. Just one more thing for you to ignore until it's absolutely necessary, just like your dentist reminding you to floss.
+Everybody knows that a well-crafted commit message is important—much like choosing a proper font for your terminal, which, let's face it, should probably be something like Arial but isn't. This tool hooks into your repository to pre-fill your commit messages based on the changes you’re making, so you can avoid subjecting the world to "fixes stuff again."
 
 ## Installation
 
-To install `commit-message-tool`, simply perform the following steps. Don’t worry, it’s more straightforward than trying to explain to your cat why you started talking to your computer.
+You can set up the commit-message-tool in your repository using one of two scripts: `setup-dev.sh` for symlinking (what a time to be alive) or `setup.sh` for an actual HTTP download.
 
-1. Clone the repository:
+### Using `setup-dev.sh`
+
+1. Clone this repository somewhere on your machine.
+2. Navigate to the directory.
+3. Run the script to set up the hook.
    ```bash
-   git clone https://github.com/yourusername/commit-message-tool.git
-   cd commit-message-tool
+   ./setup-dev.sh
    ```
 
-2. Set up the `prepare-commit-msg` hook by executing:
-   ```bash
-   bash setup-dev.sh
-   ```
+### Using `setup.sh`
 
-   This creates a symbolic link from the script to the Git hooks directory. Because typing out long paths every time you want to set something up is what we live for.
-
-3. Ensure that you have your OpenAI API key set as an environment variable. This step is crucial unless you want your tool to become as useful as a chocolate teapot:
+1. Run the following command:
    ```bash
-   export OPENAI_API_KEY='your-key-here'
+   ./setup.sh
    ```
+2. You’ll be prompted to enter the path to your git repository. To make this easier, I suggest you already know where it is.
 
 ## Usage
 
-To use **commit-message-tool**, simply make your changes and stage them. When you run `git commit`, the hook will automatically invoke the `prepare-commit-msg` script and generate a commit message based on your staged changes.
+After installation, you can make your commit as usual (you know, like `git commit`). The tool will automatically fill in the commit message based on the changes. Just try to remember to make meaningful changes—simply updating your README to celebrate your breakfast will not cut it.
 
-Let's go through an example, shall we?
+## Examples
 
-### Example
+### Example 1: Basic Commit
 
-1. Make some changes in your code. Nothing too drastic; we don’t need to reinvent the wheel here.
-
+1. Make some changes to your code.
 2. Stage your changes:
    ```bash
    git add .
    ```
-
-3. Commit your changes:
+3. Commit the changes:
    ```bash
    git commit
    ```
 
-4. Take a moment to appreciate the formatted commit message. Hopefully, it describes everything better than your last attempt at explaining why your code occasionally behaves like a grumpy cat.
+Your commit message will be automatically generated. It might look like this:
 
-### Sample Output
+```
+Refactor user authentication
 
-Suppose your diff included the following:
-```diff
-- fixed typo in documentation
-- added new feature that does nothing
+This update organizes the user authentication module
+for improved readability. Fixed various issues
+related to session management.
 ```
 
-Your automagic commit message might look like:
+### Example 2: Dealing with Conflict
+
+1. Modify some conflicting files.
+2. Stage:
+   ```bash
+   git add .
+   ```
+3. Commit:
+   ```bash
+   git commit
+   ```
+
+This will generate a message that acknowledges what you’ve done while also reminding you that merging isn’t just for physically putting two things together in a blender.
+
+### Example 3: Accidentally Deleted Code
+
+1. Delete files, cause why not?
+2. Stage those regrettable actions:
+   ```bash
+   git add .
+   ```
+3. Commit:
+   ```bash
+   git commit
+   ```
+
+The generated message might be something soul-crushing like:
 ```
-Fix typo in documentation
+Remove unused files
 
-Added a new feature that is utterly useless.
+These files were determined to be unnecessary in the
+current codebase, contributing to the tragic loss of
+important comments.
 ```
 
-Clearly, we’re stepping up from your legendary “fixed stuff.” Progress!
+## Contributing
 
-## Important Notes
-
-- Make sure you have Python 3 installed. But if you’re still using Python 2, it might be time to have a serious talk with yourself.
-
-- The commit message generator relies on OpenAI's API, so you might want to ensure it’s up and running unless you enjoy staring at wall after wall of blank nothingness.
-
-- If you run into problems or bugs, just remember: those are not bugs, they’re just features waiting to be discovered. At least, that's what we tell ourselves.
+If you’d like to contribute, perhaps guide others in crafting poignant commit messages or—dare I say—improve the horrid code, feel free to fork the repo and send a pull request. Just remember: keep it clean, or I might have to use a metaphor about a messy room.
 
 ## License
 
-This project is open-source, which means you can do whatever you want with it—as long as you don’t go and break things worse than they already are.
+This project is licensed under the MIT License—because why not? Someone has to give you some flexibility in life, and it surely won't be your last commit message.
 
-Now go forth and commit messagely!
+---
+
+Well, there you have it: your path to a more civilized git experience. Now go forth and commit artfully! (Just kidding, it’s probably just code).
